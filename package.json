@@ -1,0 +1,18 @@
+{
+  "name": "electronapp",
+  "version": "1.0.0",
+  "description": "electron demo",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://918.bimsop.com/guosen/electronApp.git"
+  },
+  "author": "guosen@bimsop.com",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^28.1.3"
+  }
+}
