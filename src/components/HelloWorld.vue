@@ -16,6 +16,7 @@
       <div>
         <li v-for="(item, index) in images" :key=index>
           <a class="deleteIcon" @click="deleteImg(item)">X</a>
+          <a class="downloadIcon" @click="downloadImg(item)">保存</a>
           <img :src=item />
       </li>
       </div>
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+// import {ipcRenderer} from 'electron' 
 export default {
   name: 'HelloWorld',
   props: {
@@ -56,6 +58,9 @@ export default {
     async closeVideo() {
       this.stream.getTracks()[0].stop();
       this.stream.getTracks()[1].stop();
+    },
+    async downloadImg(img){
+      window.electron.saveFileData('png',img);
     }
   }
 }
@@ -88,8 +93,20 @@ li .deleteIcon {
   margin-top: 10px;
 }
 
+li .downloadIcon {
+  color: white;
+  position: absolute;
+  margin-left: 366px;
+  margin-top: 30px;
+}
+
 li .deleteIcon:hover {
   color: red;
+  cursor: pointer;
+}
+
+li .downloadIcon:hover {
+  color: blue;
   cursor: pointer;
 }
 </style>
