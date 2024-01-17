@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron/main');
+const { app, BrowserWindow, Menu} = require('electron/main');
 const {ipcMain,dialog} = require('electron');
 const path = require('node:path');
 const fs = require('node:fs');
@@ -11,9 +11,13 @@ function createWindow () {
       preload: path.join(__dirname, 'preload.js')
     }
   });
-  win.webContents.openDevTools()
-  win.loadURL(`http://localhost:8080?path=${path.join(__dirname, 'preload.js')}`)
-
+  if(process.env.npm_lifecycle_script&&process.env.npm_lifecycle_script.endsWith('development')){
+    win.webContents.openDevTools()
+    win.loadURL(`http://localhost:8080`)
+  }else{
+    Menu.setApplicationMenu(null);
+    win.loadURL(`file://${path.join(__dirname,'dist/index.html')}`);
+  }
 }
 
 app.whenReady().then(() => {
